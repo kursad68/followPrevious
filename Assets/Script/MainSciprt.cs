@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class MainSciprt : MonoBehaviour
 {
+    [SerializeField]
+    CinemachineVirtualCamera cine;
+    CinemachineTransposer CineTrans;
     private void OnEnable()
     {
         EventManager.mainS += mGet;
+        EventManager.onCameraAction += cameraFollowinControl;
     }
     private void OnDisable()
     {
         EventManager.mainS += mGet;
+        EventManager.onCameraAction -= cameraFollowinControl;
     }
     MainSciprt mGet()
     {
@@ -19,10 +24,13 @@ public class MainSciprt : MonoBehaviour
     private void Start()
     {
         EventManager.LocalSize = 0;
-        EventManager.Boxlist.Add(this.gameObject);
-        Debug.Log(EventManager.Boxlist[0].name);
+        CineTrans = cine.GetCinemachineComponent<CinemachineTransposer>();
     }
-    // Update is called once per frame
+ 
+    private void cameraFollowinControl(int x)
+    {
+        CineTrans.m_FollowOffset.z -= x;
+    }
     void Update()
     {
         transform.position += Vector3.forward * 10f*Time.deltaTime;

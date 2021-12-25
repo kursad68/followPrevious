@@ -15,7 +15,11 @@ public class Swipe : MonoBehaviour
     private Rigidbody rb;
     public Rigidbody Rb { get { return (rb == null) ? rb = GetComponent<Rigidbody>() : rb; } }
 
-
+    private void Start()
+    {
+        EventManager.Boxlist.Add(this.gameObject);
+        Debug.Log(EventManager.Boxlist[0].name);
+    }
     private void OnEnable()
     {
         EventManager.GetScript += getS;
@@ -78,7 +82,7 @@ public class Swipe : MonoBehaviour
             currentSwipe =currentSwipe.normalized;
           
         
-            transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -clampOnAxis, clampOnAxis), Mathf.Clamp(transform.localPosition.y,-5f,5f), transform.localPosition.z);
+            transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -clampOnAxis, clampOnAxis), Mathf.Clamp(transform.localPosition.y,.3f,5f), 0);
 
           if (firstPressPos.x != secondPressPos.x || firstPressPos.y != secondPressPos.y)
             {

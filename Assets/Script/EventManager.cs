@@ -4,14 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using UnityEngine.Events;
-public enum CubeType
-{
-    shoulder,
-    body,
-    head,
-    handle,
-    Cube
-}
 
 public static class EventManager 
 {
@@ -21,4 +13,6 @@ public static class EventManager
 
     public static Func<Swipe> GetScript;
     public static Func<MainSciprt> mainS;
+
+    public static Action<int> onCameraAction;
 }
