@@ -16,10 +16,15 @@ public class MainSciprt : MonoBehaviour
     {
         return GetComponent<MainSciprt>();
     }
-
+    private void Start()
+    {
+        EventManager.LocalSize = 0;
+        EventManager.Boxlist.Add(this.gameObject);
+        Debug.Log(EventManager.Boxlist[0].name);
+    }
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.forward * 4f*Time.deltaTime;
+        transform.position += Vector3.forward * 10f*Time.deltaTime;
     }
 }

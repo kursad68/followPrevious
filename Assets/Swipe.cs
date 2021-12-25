@@ -7,7 +7,7 @@ public class Swipe : MonoBehaviour
     Vector3 firstPressPos, secondPressPos, currentSwipe,SwipeCurrent;
     public float sensivity;
     public float NothingField=1.5f, clampOnAxis=6f,JumpToSens=50,jumpToMove=7,jumpForWait=1.5f,rotateSensRadian=30f;
-    public bool isRotation;
+    public bool isRotation,isjump;
 
 
 
@@ -82,8 +82,17 @@ public class Swipe : MonoBehaviour
 
           if (firstPressPos.x != secondPressPos.x || firstPressPos.y != secondPressPos.y)
             {
-               
-              
+                if (SwipeCurrent.y > JumpToSens && isjump == true )
+                {
+                    isjump = false;
+      
+                    Rb.velocity = new Vector3(0, jumpToMove, 0);
+                    StartCoroutine(JumpforWait(jumpForWait, isjump));
+                
+
+
+                }
+
                 //swipe left
                 if (currentSwipe.x < 0)
                 {
@@ -114,6 +123,15 @@ public class Swipe : MonoBehaviour
         }
          
     }
-
+    IEnumerator JumpforWait(float value, bool isTag)
+    {
+        yield return new WaitForSeconds(0.5f);
+    
+        yield return new WaitForSeconds(value - 0.5f);
+        isjump = true;
  
+
+
+    }
+
 }
