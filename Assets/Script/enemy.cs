@@ -39,11 +39,9 @@ public class enemy : MonoBehaviour
         parent = m.gameObject;
         transform.SetParent(parent.transform);
         EventManager.LocalSize--;
-        i = EventManager.LocalSize;
-        Debug.Log(i);
+        i = EventManager.LocalSize;  
         EventManager.Boxlist.Add(gameObject);
         previos = EventManager.Boxlist[-i - 1];
         EventManager.onCameraAction.Invoke(1);
-        Debug.Log(previos.name);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 public class MainSciprt : MonoBehaviour
 {
     [SerializeField]
@@ -27,9 +28,10 @@ public class MainSciprt : MonoBehaviour
         CineTrans = cine.GetCinemachineComponent<CinemachineTransposer>();
     }
  
-    private void cameraFollowinControl(int x)
+    private void cameraFollowinControl(int value)
     {
-        CineTrans.m_FollowOffset.z -= x;
+        //CineTrans.m_FollowOffset.z -= x;
+        DOTween.To(() => CineTrans.m_FollowOffset.z, x => CineTrans.m_FollowOffset.z = x, CineTrans.m_FollowOffset.z - value, 1f);
     }
     void Update()
     {
